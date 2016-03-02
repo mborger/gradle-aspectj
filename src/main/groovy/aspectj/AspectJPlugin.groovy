@@ -57,6 +57,10 @@ class AspectJPlugin implements Plugin<Project> {
                 project.tasks[aspectTaskName].dependsOn(project.tasks[aspectTaskName].ajInpath)
                 project.tasks[javaTaskName].deleteAllActions()
                 project.tasks[javaTaskName].dependsOn(project.tasks[aspectTaskName])
+
+		project.configurations.findByName(namingConventions.getAspectPathConfigurationName(projectSourceSet)) {
+			exclude group: 'org.aspectj', module: 'aspectjweaver'
+		}
             }
         }
     }
